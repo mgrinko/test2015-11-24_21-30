@@ -7,8 +7,12 @@ class Timer {
     }
 
     start() {
-        setInterval(this._update.bind(this), 1000);
+        this._timerId = setInterval(this._update.bind(this), 1000);
         this._update();
+    }
+
+    stop() {
+        clearInterval(this._timerId);
     }
 
     _update() {
@@ -39,3 +43,5 @@ let timer2 = new Timer({
 });
 
 timer2.start();
+
+setTimeout(timer2.stop.bind(timer2), 5000);
