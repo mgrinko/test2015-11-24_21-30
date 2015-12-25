@@ -1,27 +1,41 @@
 "use strict";
 
-var timerId;
+class Timer {
+    constructor(options) {
+        this._el = options.element;
+        this._el.innerHTML = '<span class="hour">hh</span>:<span class="min">mm</span>:<span class="sec">ss</span>';
+    }
 
-function update() {
-    var clock = document.getElementById('clock');
-    var date = new Date();
+    start() {
+        setInterval(this._update.bind(this), 1000);
+        this._update();
+    }
 
-    var hours = date.getHours();
-    if (hours < 10) hours = '0' + hours;
-    clock.children[0].innerHTML = hours;
+    _update() {
+        var date = new Date();
 
-    var minutes = date.getMinutes();
-    if (minutes < 10) minutes = '0' + minutes;
-    clock.children[1].innerHTML = minutes;
+        var hours = date.getHours();
+        if (hours < 10) hours = '0' + hours;
+        this._el.children[0].innerHTML = hours;
 
-    var seconds = date.getSeconds();
-    if (seconds < 10) seconds = '0' + seconds;
-    clock.children[2].innerHTML = seconds;
+        var minutes = date.getMinutes();
+        if (minutes < 10) minutes = '0' + minutes;
+        this._el.children[1].innerHTML = minutes;
+
+        var seconds = date.getSeconds();
+        if (seconds < 10) seconds = '0' + seconds;
+        this._el.children[2].innerHTML = seconds;
+    }
 }
 
-function clockStart() {
-    setInterval(update, 1000);
-    update(); // <--  начать тут же, не ждать 1 секунду пока setInterval сработает
-}
+let timer1 = new Timer({
+    element: document.getElementById('clock1')
+});
 
-clockStart();
+timer1.start();
+
+let timer2 = new Timer({
+    element: document.getElementById('clock2')
+});
+
+timer2.start();
