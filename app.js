@@ -5,10 +5,10 @@ class Timer {
         this._el = options.element;
 
         this._startButton = this._el.querySelector('.start');
-        this._startButton.addEventListener('click', this.start.bind(this));
+        this._startButton.addEventListener('click', this._onStartButtonClick.bind(this));
 
         this._stopButton = this._el.querySelector('.stop');
-        this._stopButton.addEventListener('click', this.stop.bind(this));
+        this._stopButton.addEventListener('click', this._onStopButtonClick.bind(this));
     }
 
     start() {
@@ -18,6 +18,14 @@ class Timer {
 
     stop() {
         clearInterval(this._timerId);
+    }
+
+    _onStartButtonClick(event) {
+        this.start();
+    }
+
+    _onStopButtonClick(event) {
+        this.stop();
     }
 
     _update() {
