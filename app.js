@@ -3,7 +3,12 @@
 class Timer {
     constructor(options) {
         this._el = options.element;
-        this._el.innerHTML = '<span class="hour">hh</span>:<span class="min">mm</span>:<span class="sec">ss</span>';
+
+        this._startButton = this._el.querySelector('.start');
+        this._startButton.addEventListener('click', this.start.bind(this));
+
+        this._stopButton = this._el.querySelector('.stop');
+        this._stopButton.addEventListener('click', this.stop.bind(this));
     }
 
     start() {
@@ -35,13 +40,3 @@ class Timer {
 let timer1 = new Timer({
     element: document.getElementById('clock1')
 });
-
-timer1.start();
-
-let timer2 = new Timer({
-    element: document.getElementById('clock2')
-});
-
-timer2.start();
-
-setTimeout(timer2.stop.bind(timer2), 5000);
