@@ -1,11 +1,11 @@
-.hour {
-    color: red
+.menu-list {
+    display: none;
 }
 
-.min {
-    color: green
+.open > .menu-list {
+    display: block;
 }
 
-.sec {
-    color: blue
+.item-title {
+    cursor: pointer;
 }

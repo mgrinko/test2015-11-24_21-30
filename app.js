@@ -1,50 +1,23 @@
-"use strict";
+'use strict';
 
-class Timer {
-    constructor(options) {
-        this._el = options.element;
+class Menu {
+  constructor(options) {
+    this._el = options.el;
+    this._list = this._el.querySelector('.menu-list');
 
-        this._startButton = this._el.querySelector('.start');
-        this._startButton.addEventListener('click', this._onStartButtonClick.bind(this));
+    var itemTitles = Array.from(this._list.querySelectorAll('.item-title'));
 
-        this._stopButton = this._el.querySelector('.stop');
-        this._stopButton.addEventListener('click', this._onStopButtonClick.bind(this));
-    }
+    itemTitles.forEach(function(title) {
+      title.onclick = function() {
+        title.closest('.menu-item').classList.toggle('open');
+      };
+    });
 
-    start() {
-        this._timerId = setInterval(this._update.bind(this), 1000);
-        this._update();
-    }
 
-    stop() {
-        clearInterval(this._timerId);
-    }
-
-    _onStartButtonClick(event) {
-        this.start();
-    }
-
-    _onStopButtonClick(event) {
-        this.stop();
-    }
-
-    _update() {
-        var date = new Date();
-
-        var hours = date.getHours();
-        if (hours < 10) hours = '0' + hours;
-        this._el.children[0].innerHTML = hours;
-
-        var minutes = date.getMinutes();
-        if (minutes < 10) minutes = '0' + minutes;
-        this._el.children[1].innerHTML = minutes;
-
-        var seconds = date.getSeconds();
-        if (seconds < 10) seconds = '0' + seconds;
-        this._el.children[2].innerHTML = seconds;
-    }
+  }
 }
 
-let timer1 = new Timer({
-    element: document.getElementById('clock1')
+new Menu({
+  el: document.getElementById('menu'),
+  data: {}
 });
