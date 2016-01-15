@@ -4,47 +4,25 @@
 <head>
   <meta charset="utf-8">
   <link rel="stylesheet" href="main.css">
-  <script src="app.js" defer></script>
+  <script src="app.js"></script>
 </head>
 
 <body>
 
-<div id="menu">
+  <div id="sweeties" class="menu">
+    <span class="menu_title">Сладости (нажми меня)!</span>
+    <ul>
+      <li>Торт</li>
+      <li>Пончик</li>
+      <li>Пирожное</li>
+    </ul>
 
-  <ul>
-    <li class="menu-item">
-      <span class="item-title">header 1</span>
-      <ul class="menu-list">
-        <li class="menu-item"><span class="item-title"><b>header 1</b></span>
-          <ul class="menu-list">
-            <li class="menu-item"><a class="item-link" href="http://google.com">item 1</a></li>
-            <li class="menu-item"><a class="item-link" href="#2">item 2</a></li>
-            <li class="menu-item"><a class="item-link" href="#3">item 3</a></li>
-          </ul>
-        </li>
-        <li class="menu-item"><a class="item-link" href="#2">item 2</a></li>
-        <li class="menu-item"><a class="item-link" href="#3">item 3</a></li>
-      </ul>
-    </li>
-    <li class="menu-item">
-      <span class="item-title">header 2</span>
-      <ul class="menu-list">
-        <li class="menu-item"><a class="item-link" href="#1">item 1</a></li>
-        <li class="menu-item"><a class="item-link" href="#2">item 2</a></li>
-        <li class="menu-item"><a class="item-link" href="#3">item 3</a></li>
-      </ul>    </li>
-    <li class="menu-item">
-      <span class="item-title">header 3</span>
-      <ul class="menu-list">
-        <li class="menu-item"><a class="item-link" href="#1">item 1</a></li>
-        <li class="menu-item"><a class="item-link" href="#2">item 2</a></li>
-        <li class="menu-item"><a class="item-link" href="#3">item 3</a></li>
-      </ul></li>
-  </ul>
-</div>
+  </div>
 
 <script>
-
+  var menu = new Menu({
+    element: document.getElementById('sweeties')
+  });
 </script>
 
 </body>
