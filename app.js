@@ -19,6 +19,12 @@ class Menu {
   }
 }
 
+/**
+ * Filter can trigger 'filterValueChanged' event with value in details
+ *
+ * @events
+ *    filterValueChanged:
+ */
 class Filter {
   constructor(options) {
     this._el = options.element;
@@ -39,7 +45,7 @@ class Filter {
       }
     });
 
-    console.log('Filter value has changed to ' + this._field.value);
+    //console.log('Filter value has changed to ' + this._field.value);
 
     this._el.dispatchEvent(customEvent);
   }
@@ -61,6 +67,8 @@ class Navigation {
   }
 
   _onFilterValueChanged(event) {
-    console.log('Current filter value is ' + event.detail.value);
+    //console.log('Current filter value is ' + event.detail.value);
+
+    this._menu.filter(event.detail.value);
   }
 }
