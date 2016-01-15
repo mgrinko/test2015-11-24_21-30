@@ -9,19 +9,25 @@
 
 <body>
 
-  <div id="sweeties" class="menu">
-    <span class="menu_title">Сладости (нажми меня)!</span>
-    <ul>
-      <li>Торт</li>
-      <li>Пончик</li>
-      <li>Пирожное</li>
-    </ul>
+  <div class="navigation">
+    <div class="filter">
+      <input type="text" class="filter_field">
+    </div>
 
+    <div class="menu">
+      <span class="menu_title">Сладости (нажми меня)!</span>
+      <ul>
+        <li>Торт</li>
+        <li>Пончик</li>
+        <li>Пирожное</li>
+      </ul>
+
+    </div>
   </div>
 
 <script>
-  var menu = new Menu({
-    element: document.getElementById('sweeties')
+  var nav = new Navigation({
+    element: document.querySelector('.navigation')
   });
 </script>
 
