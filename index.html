@@ -14,6 +14,19 @@
 </head>
 
 <body>
+  <script type="text/template" id="product-catalog-template">
+
+    <span class="number-of-phones">We have <%- phones.length %> phones</span>
+    <ul class="phone-catalog__list">
+      <% phones.forEach(function(phone) { %>
+      <li data-selector="phone" data-phone-id="<%- phone.id %>">
+        <%- phone.age %><a href="#<%- phone.id %>"><%- phone.name %></a>
+      </li>
+      <% }); %>
+    </ul>
+
+  </script>
+
   <div id="application">
     <div class="side-panel">
       <div class="filter" data-component="filter"></div>

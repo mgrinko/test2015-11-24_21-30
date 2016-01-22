@@ -12,5 +12,11 @@ class Page {
       element: this._el.querySelector('[data-component=phone-catalog]'),
       phones: options.phones
     });
+
+    this._phoneCatalog._el.addEventListener('phoneSelected', this._onPhoneSelected.bind(this))
+  }
+
+  _onPhoneSelected(event) {
+    alert(event.detail.phoneId)
   }
 }

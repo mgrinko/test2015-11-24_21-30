@@ -4,19 +4,32 @@ class PhoneCatalog {
   constructor(options) {
     this._el = options.element;
 
-    this._template = `
-      <span class="number-of-phones">We have <%- phones.length %> phones</span>
-      <ul class="phone-catalog__list">
-        <% phones.forEach(function(phone) { %>
-          <li><%- phone.age %><a href="#<%- phone.id %>"><%- phone.name %></a></li>
-        <% }); %>
-      </ul>
-    `;
+    this._template = document.getElementById('product-catalog-template').innerHTML;
 
     this._compiledTemplate = _.template(this._template);
 
     this._el.innerHTML = this._compiledTemplate({
       phones: options.phones
     });
+
+    this._el.addEventListener('click', this._onPhoneClick.bind(this))
+  }
+
+  _onPhoneClick(event) {
+    var phoneElement = event.target.closest('[data-selector=phone]');
+
+    if (!phoneElement) {
+      return;
+    }
+
+    event.preventDefault();
+
+    var phoneSelectedEvent = new CustomEvent('phoneSelected', {
+      detail: {
+        phoneId: phoneElement.dataset.phoneId
+      }
+    });
+
+    this._el.dispatchEvent(phoneSelectedEvent);
   }
 }
