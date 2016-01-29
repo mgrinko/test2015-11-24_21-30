@@ -1,0 +1,6 @@
+span.number-of-phones We have #{phones.length} phones
+
+ul.phone-catalog__list
+  each phone in phones
+    li(data-selector="phone", data-phone-id="#{phone.id}") #{phone.age}
+        a(href="# #{phone.id}") #{phone.name}
