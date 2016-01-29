@@ -1,10 +1,14 @@
 'use strict';
 
+require('./styles.css');
+
+let template = require('./template.html');
+
 module.exports = class PhoneCatalog {
   constructor(options) {
     this._el = options.element;
 
-    this._template = document.getElementById('product-catalog-template').innerHTML;
+    this._template = template;
 
     this._compiledTemplate = _.template(this._template);
 

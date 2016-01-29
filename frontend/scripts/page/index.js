@@ -1,7 +1,7 @@
 'use strict';
 
-let Filter = require('./filter');
-let PhoneCatalog = require('./phoneCatalog');
+let Filter = require('./../filter');
+let PhoneCatalog = require('./../phoneCatalog');
 
 module.exports = class Page {
   constructor(options) {
