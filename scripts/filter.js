@@ -1,6 +1,6 @@
 'use strict';
 
-class Filter {
+module.exports = class Filter {
   constructor(options) {
     this._el = options.element;
 
@@ -10,4 +10,4 @@ class Filter {
 
     this._el.innerHTML = this._template;
   }
-}
+};

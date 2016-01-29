@@ -1,6 +1,6 @@
 'use strict';
 
-class PhoneCatalog {
+module.exports = class PhoneCatalog {
   constructor(options) {
     this._el = options.element;
 
@@ -32,4 +32,4 @@ class PhoneCatalog {
 
     this._el.dispatchEvent(phoneSelectedEvent);
   }
-}
+};
