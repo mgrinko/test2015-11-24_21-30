@@ -2,15 +2,15 @@
 
 require('./styles.css');
 
-let template = require('./template.html');
+let template = require('jade!./template.jade');
 
 module.exports = class PhoneCatalog {
   constructor(options) {
     this._el = options.element;
 
-    this._template = template;
+    //this._template = template;
 
-    this._compiledTemplate = _.template(this._template);
+    this._compiledTemplate = template;
 
     this._el.innerHTML = this._compiledTemplate({
       phones: options.phones
