@@ -15,7 +15,7 @@ function accept(req, res) {
     } else {
       file.serve(req, res);
     }
-  }, 1000);
+  }, 5000);
 
 }
 

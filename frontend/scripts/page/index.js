@@ -12,17 +12,19 @@ module.exports = class Page {
     this._el = options.element;
     this._content = this._el.querySelector(SELECTORS.content);
 
-    this._sendRequest({
+    let phoneCatalogPromise = this._sendRequest({
       method: 'GET',
-      url: options.phonesUrl,
-      successCallback: this._onPhoneListLoaded.bind(this),
-      errorCallback: function(error) {
-        console.log(error);
-      }
+      url: options.phonesUrl
     });
+
+    phoneCatalogPromise
+      .then(this._onPhoneCatalogLoaded.bind(this))
+      .catch(function(error) {
+        console.log(error);
+      });
   }
 
-  _onPhoneListLoaded(phones) {
+  _onPhoneCatalogLoaded(phones) {
     this._init({
       phones: phones
     });
@@ -42,11 +44,19 @@ module.exports = class Page {
   }
 
   _onPhoneSelected(event) {
-    this._sendRequest({
+    let phoneDetailsPromise = this._sendRequest({
       method: 'GET',
-      url: `/data/phones/${event.detail.phoneId}.json`,
-      successCallback: this._onPhoneDetailsLoaded.bind(this)
+      url: `/data/phones/${event.detail.phoneId}.json`
     });
+
+    let mouseoutPromise = this._createMouseoutPromise();
+
+    mouseoutPromise
+      .then(function(result) {
+      	return phoneDetailsPromise;
+      }.bind(this))
+      .then(this._onPhoneDetailsLoaded.bind(this))
+      .catch(error => console.log(error));
   }
 
   _onPhoneDetailsLoaded(phoneData) {
@@ -57,23 +67,33 @@ module.exports = class Page {
     this._content.innerHTML = `<img src="${phoneData.images[0]}">`;
   }
 
+  _createMouseoutPromise() {
+    return new Promise(function(resolve, reject) {
+      this._phoneCatalog._el.addEventListener('mouseout', function() {
+        resolve();
+      });
+    }.bind(this));
+  }
+
   _sendRequest(options) {
-    var xhr = new XMLHttpRequest();
+    return new Promise(function(resolve, reject) {
+      let xhr = new XMLHttpRequest();
 
-    xhr.open(options.method, options.url);
+      xhr.open(options.method, options.url);
 
-    xhr.onload = function() {
-      if (xhr.status !== 200) {
-        options.errorCallback( new Error(xhr.status + ': ' + xhr.statusText) );
-      } else {
-        options.successCallback( JSON.parse(xhr.responseText) );
-      }
-    };
+      xhr.onload = function() {
+        if (xhr.status === 200) {
+          resolve( JSON.parse(xhr.responseText) );
+        } else {
+          reject( new Error(xhr.status + ': ' + xhr.statusText) );
+        }
+      };
 
-    xhr.onerror = function(error) {
-      options.errorCallback(error);
-    };
+      xhr.onerror = function(error) {
+        reject(error);
+      };
 
-    xhr.send();
+      xhr.send();
+    });
   }
 };
