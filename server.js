@@ -2,20 +2,21 @@ var http = require('http');
 var url = require('url');
 var querystring = require('querystring');
 var static = require('node-static');
-var file = new static.Server('.', {
+var file = new static.Server('./public', {
   cache: 0
 });
 
 function accept(req, res) {
   console.log(req.url);
 
-  if (req.url == '/data/phones.json') {
-    setTimeout(function() {
+  setTimeout(function() {
+    if (req.url == '/data/phones.json') {
       file.serve(req, res);
-    }, 5000);
-  } else {
-    file.serve(req, res);
-  }
+    } else {
+      file.serve(req, res);
+    }
+  }, 1000);
+
 }
 
 if (!module.parent) {
