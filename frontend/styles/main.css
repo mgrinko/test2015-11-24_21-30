@@ -1,29 +1,22 @@
-.menu ul {
-    margin: 0;
-    list-style: none;
-    padding-left: 20px;
-    display: none;
+.side-panel {
+	max-width: 33%;
+	overflow-x: hidden;
+	border: solid 1px black;
+	float: left;
 }
 
-.menu .menu_title {
-    font-size: 18px;
-    cursor: pointer;
+.side-panel {
+	width: 500px;
+	min-height: 300px;
 }
 
-.menu .menu_title::before {
-    content: '▶ ';
-    font-size: 80%;
-    color: green;
+.main-content {
+	max-width: 66%;
+	float: left;
+	border: solid 1px black;
+	min-height: 300px;
 }
 
-.menu.open .menu_title::before {
-    content: '▼ ';
-}
-
-.menu.open ul {
-    display: block;
-}
-
-body {
-	background-color: yellow;
+.loading .side-panel {
+	background-color: #006600;
 }
